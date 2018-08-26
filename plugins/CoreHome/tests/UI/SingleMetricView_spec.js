@@ -34,11 +34,10 @@ describe('SingleMetricView', function () {
 
     it('should handle formatted metrics properly', async function () {
         await (await page.jQuery('#widgetCoreVisualizationssingleMetricViewcolumn .single-metric-view-picker')).hover();
+        await page.waitFor(100); // wait for popover visible
         await (await page.jQuery('.jqplot-seriespicker-popover label:contains(Revenue)')).click();
         await page.waitFor(250);
-        var elem = await page.waitForSelector('#widgetCoreVisualizationssingleMetricViewcolumn');
-        await page.waitForNetworkIdle();
-        await page.waitFor(250);
+        var elem = await page.$('#widgetCoreVisualizationssingleMetricViewcolumn');
         expect(await elem.screenshot()).to.matchImage('formatted_metric');
     });
 
