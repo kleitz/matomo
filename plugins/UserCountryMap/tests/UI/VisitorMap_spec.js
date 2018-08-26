@@ -27,6 +27,7 @@ describe("VisitorMap", function () {
     });
 
     it("should display the average time on site metric correctly", async function() {
+        await page.mouse.move(0, 0);
         await page.evaluate(function () {
             $('.userCountryMapSelectMetrics').val('avg_time_on_site').trigger('change');
         });
@@ -56,6 +57,7 @@ describe("VisitorMap", function () {
 
     it("should display the cities layer correctly", async function() {
         await page.click('.UserCountryMap-btn-city');
+        await page.waitForNetworkIdle();
         await page.waitFor(250); // wait for map
 
         expect(await page.screenshot({ fullPage: true })).to.matchImage('cities');
