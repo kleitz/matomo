@@ -29,6 +29,7 @@ describe("UsersManager", function () {
 
     it('should change the results page when next is clicked', async function () {
         await page.click('.usersListPagination .btn.next');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('next_click');
@@ -39,6 +40,7 @@ describe("UsersManager", function () {
         await page.evaluate(function () {
             $('select[name=access-level-filter]').val('string:view').change();
         });
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('filters');
@@ -54,6 +56,7 @@ describe("UsersManager", function () {
         await page.waitForNetworkIdle();
         var elem = await page.jQuery('.siteSelector .custom_select_container a:contains(relentless)');
         await elem.click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('role_for');
@@ -109,6 +112,7 @@ describe("UsersManager", function () {
 
     it('should change access for all rows in search when confirmed', async function () {
         await (await page.jQuery('.change-user-role-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('bulk_set_access');
@@ -120,6 +124,7 @@ describe("UsersManager", function () {
         await page.click('.bulk-actions.btn');
         await (await page.jQuery('#user-list-bulk-actions a:contains(Remove Permissions)')).click();
         await (await page.jQuery('.change-user-role-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('bulk_remove_access');
@@ -127,6 +132,7 @@ describe("UsersManager", function () {
 
     it('should go back to first page when previous button is clicked', async function () {
         await page.click('.usersListPagination .btn.prev');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('previous');
@@ -135,6 +141,7 @@ describe("UsersManager", function () {
     it('should delete a single user when the modal is confirmed is clicked', async function () {
         await (await page.jQuery('.deleteuser:eq(0)')).click();
         await (await page.jQuery('.delete-user-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('delete_single');
@@ -146,6 +153,7 @@ describe("UsersManager", function () {
         await page.click('.bulk-actions.btn');
         await (await page.jQuery('#user-list-bulk-actions a:contains(Delete Users)')).click();
         await (await page.jQuery('.delete-user-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('delete_bulk_access');
@@ -153,6 +161,7 @@ describe("UsersManager", function () {
 
     it('should show the add new user form when the add new user button is clicked', async function () {
         await page.click('.add-user-container .btn');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('add_new_user_form');
@@ -167,6 +176,7 @@ describe("UsersManager", function () {
         await (await page.jQuery('piwik-user-edit-form .siteSelector .custom_select_container a:eq(1)')).click();
 
         await page.click('piwik-user-edit-form [piwik-save-button]');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('user_created');
@@ -207,6 +217,7 @@ describe("UsersManager", function () {
 
     it('should go to the next results page when the next button is clicked', async function () {
         await page.click('.sites-for-permission-pagination a.next');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_next');
@@ -215,6 +226,7 @@ describe("UsersManager", function () {
     it('should remove access to a single site when the trash icon is used', async function () {
         await page.click('#sitesForPermission .deleteaccess');
         await (await page.jQuery('.delete-access-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_remove_single');
@@ -235,6 +247,7 @@ describe("UsersManager", function () {
         await (await page.jQuery('#user-permissions-edit-bulk-actions a:contains(Admin)')).click();
 
         await (await page.jQuery('.change-access-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_bulk_access_set');
@@ -245,6 +258,7 @@ describe("UsersManager", function () {
         await page.evaluate(function () {
             $('.access-filter select').val('string:admin').change();
         });
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_filters');
@@ -267,6 +281,7 @@ describe("UsersManager", function () {
         await page.evaluate(function () { // remove filter
             $('.access-filter select').val('string:some').change();
         });
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_bulk_access_set_all');
@@ -278,6 +293,7 @@ describe("UsersManager", function () {
         });
 
         await (await page.jQuery('.change-access-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_single_site_access');
@@ -297,6 +313,7 @@ describe("UsersManager", function () {
         await (await page.jQuery('.userPermissionsEdit a:contains(Remove Permissions)')).click();
 
         await (await page.jQuery('.delete-access-confirm-modal .modal-close:not(.modal-no)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_remove_access');
@@ -319,6 +336,7 @@ describe("UsersManager", function () {
 
     it('should give the user superuser access when the superuser modal is confirmed', async function () {
         await page.click('.superuser-confirm-modal .modal-close:not(.modal-no)');
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('superuser_set');
@@ -330,6 +348,7 @@ describe("UsersManager", function () {
         await page.evaluate(function () { // remove filter so new user shows
             $('#user-text-filter').val('').change();
         });
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('manage_users_back');
@@ -337,6 +356,7 @@ describe("UsersManager", function () {
 
     it('should show the edit user form when the edit icon in a row is clicked', async function () {
         await (await page.jQuery('button.edituser:eq(0)')).click();
+        await page.waitForNetworkIdle();
 
         pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('edit_user_form');
@@ -373,6 +393,7 @@ describe("UsersManager", function () {
 
         it('should show the add user form for admin users', async function () {
             await page.click('.add-user-container .btn');
+            await page.waitForNetworkIdle();
 
             pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_add_user');
@@ -383,6 +404,7 @@ describe("UsersManager", function () {
                 $('.userEditForm .entityCancelLink').click();
             });
             await (await page.jQuery('button.edituser:eq(0)')).click();
+            await page.waitForNetworkIdle();
 
             pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('edit_user_basic_info');
@@ -410,6 +432,7 @@ describe("UsersManager", function () {
         it('should add a user by email when an email is entered', async function () {
             await page.type('input[name="add-existing-user-email"]', '0_login3conchords@example.com');
             await (await page.jQuery('.add-existing-user-modal .modal-close:not(.modal-no)')).click();
+            await page.waitForNetworkIdle();
 
             await page.evaluate(function () { // show new user
                 $('#user-text-filter').val('0_login3conchords@example.com').change();
@@ -424,6 +447,7 @@ describe("UsersManager", function () {
             await page.click('.add-existing-user');
             await page.type('input[name="add-existing-user-email"]', '10_login8');
             await (await page.jQuery('.add-existing-user-modal .modal-close:not(.modal-no)')).click();
+            await page.waitForNetworkIdle();
 
             await page.evaluate(function () { // show new user
                 $('#user-text-filter').val('10_login8').change();
@@ -437,6 +461,7 @@ describe("UsersManager", function () {
             await page.click('.add-existing-user');
             await page.type('input[name="add-existing-user-email"]', 'sldkjfsdlkfjsdkl');
             await (await page.jQuery('.add-existing-user-modal .modal-close:not(.modal-no)')).click();
+            await page.waitForNetworkIdle();
 
             await page.evaluate(function () { // show no user added
                 $('#user-text-filter').val('sldkjfsdlkfjsdkl').change();
