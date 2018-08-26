@@ -23,14 +23,14 @@ describe("UsersManager", function () {
     it('should display the manage users page correctly', async function () {
         await page.goto(url);
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('load');
     });
 
     it('should change the results page when next is clicked', async function () {
         await page.click('.usersListPagination .btn.next');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('next_click');
     });
 
@@ -40,7 +40,7 @@ describe("UsersManager", function () {
             $('select[name=access-level-filter]').val('string:view').change();
         });
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('filters');
     });
 
@@ -55,7 +55,7 @@ describe("UsersManager", function () {
         var elem = await page.jQuery('.siteSelector .custom_select_container a:contains(relentless)');
         await elem.click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('role_for');
     });
 
@@ -64,14 +64,14 @@ describe("UsersManager", function () {
         await (await page.jQuery('td.select-cell label:eq(3)')).click();
         await (await page.jQuery('td.select-cell label:eq(8)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('rows_selected');
     });
 
     it('should select all rows when all row select is clicked', async function () {
         await page.click('th.select-cell label');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('all_rows_selected');
     });
 
@@ -79,7 +79,7 @@ describe("UsersManager", function () {
         await page.click('.toggle-select-all-in-search');
         await page.mouse.move(0, 0);
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('all_rows_in_search');
     });
 
@@ -87,7 +87,7 @@ describe("UsersManager", function () {
         await page.click('.toggle-select-all-in-search');
         await page.mouse.move(0, 0);
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('all_rows_selected');
     });
 
@@ -110,7 +110,7 @@ describe("UsersManager", function () {
     it('should change access for all rows in search when confirmed', async function () {
         await (await page.jQuery('.change-user-role-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('bulk_set_access');
     });
 
@@ -121,14 +121,14 @@ describe("UsersManager", function () {
         await (await page.jQuery('#user-list-bulk-actions a:contains(Remove Permissions)')).click();
         await (await page.jQuery('.change-user-role-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('bulk_remove_access');
     });
 
     it('should go back to first page when previous button is clicked', async function () {
         await page.click('.usersListPagination .btn.prev');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('previous');
     });
 
@@ -136,7 +136,7 @@ describe("UsersManager", function () {
         await (await page.jQuery('.deleteuser:eq(0)')).click();
         await (await page.jQuery('.delete-user-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('delete_single');
     });
 
@@ -147,14 +147,14 @@ describe("UsersManager", function () {
         await (await page.jQuery('#user-list-bulk-actions a:contains(Delete Users)')).click();
         await (await page.jQuery('.delete-user-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('delete_bulk_access');
     });
 
     it('should show the add new user form when the add new user button is clicked', async function () {
         await page.click('.add-user-container .btn');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('add_new_user_form');
     });
 
@@ -168,7 +168,7 @@ describe("UsersManager", function () {
 
         await page.click('piwik-user-edit-form [piwik-save-button]');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('user_created');
     });
 
@@ -176,7 +176,7 @@ describe("UsersManager", function () {
         await page.click('.userEditForm .menuPermissions');
         await page.mouse.move(0, 0);
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_edit');
     });
 
@@ -190,7 +190,7 @@ describe("UsersManager", function () {
         await page.click('.userPermissionsEdit th.select-cell label');
         await page.click('.userPermissionsEdit tr.select-all-row a');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_all_rows_in_search');
     });
 
@@ -201,14 +201,14 @@ describe("UsersManager", function () {
 
         await (await page.jQuery('.change-access-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_all_sites_access');
     });
 
     it('should go to the next results page when the next button is clicked', async function () {
         await page.click('.sites-for-permission-pagination a.next');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_next');
     });
 
@@ -216,7 +216,7 @@ describe("UsersManager", function () {
         await page.click('#sitesForPermission .deleteaccess');
         await (await page.jQuery('.delete-access-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_remove_single');
     });
 
@@ -225,7 +225,7 @@ describe("UsersManager", function () {
         await (await page.jQuery('#sitesForPermission td.select-cell label:eq(3)')).click();
         await (await page.jQuery('#sitesForPermission td.select-cell label:eq(8)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_select_multiple');
     });
 
@@ -236,7 +236,7 @@ describe("UsersManager", function () {
 
         await (await page.jQuery('.change-access-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_bulk_access_set');
     });
 
@@ -246,14 +246,14 @@ describe("UsersManager", function () {
             $('.access-filter select').val('string:admin').change();
         });
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_filters');
     });
 
     it('should select all displayed rows when the select all checkbox is clicked', async function () {
         await page.click('.userPermissionsEdit th.select-cell label');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_select_all');
     });
 
@@ -268,7 +268,7 @@ describe("UsersManager", function () {
             $('.access-filter select').val('string:some').change();
         });
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_bulk_access_set_all');
     });
 
@@ -279,7 +279,7 @@ describe("UsersManager", function () {
 
         await (await page.jQuery('.change-access-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_single_site_access');
     });
 
@@ -298,7 +298,7 @@ describe("UsersManager", function () {
 
         await (await page.jQuery('.delete-access-confirm-modal .modal-close:not(.modal-no)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('permissions_remove_access');
     });
 
@@ -306,7 +306,7 @@ describe("UsersManager", function () {
         await page.click('.userEditForm .menuSuperuser');
         await page.mouse.move(0, 0);
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('superuser_tab');
     });
 
@@ -320,7 +320,7 @@ describe("UsersManager", function () {
     it('should give the user superuser access when the superuser modal is confirmed', async function () {
         await page.click('.superuser-confirm-modal .modal-close:not(.modal-no)');
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('superuser_set');
     });
 
@@ -331,14 +331,14 @@ describe("UsersManager", function () {
             $('#user-text-filter').val('').change();
         });
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('manage_users_back');
     });
 
     it('should show the edit user form when the edit icon in a row is clicked', async function () {
         await (await page.jQuery('button.edituser:eq(0)')).click();
 
-        pageWrap = await page.$('.admin#content');
+        pageWrap = await page.$('.usersManager');
         expect(await pageWrap.screenshot()).to.matchImage('edit_user_form');
     });
 
@@ -367,14 +367,14 @@ describe("UsersManager", function () {
         it('should hide columns & functionality if an admin user views the manage user page', async function () {
             await page.goto(url);
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_load');
         });
 
         it('should show the add user form for admin users', async function () {
             await page.click('.add-user-container .btn');
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_add_user');
         });
 
@@ -384,14 +384,14 @@ describe("UsersManager", function () {
             });
             await (await page.jQuery('button.edituser:eq(0)')).click();
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('edit_user_basic_info');
         });
 
         it('should allow editing user permissions for admin users', async function () {
             await page.click('.userEditForm .menuPermissions');
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_edit_permissions');
         });
 
@@ -416,7 +416,7 @@ describe("UsersManager", function () {
             });
             await page.waitFor(500);
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_add_user_by_email');
         });
 
@@ -429,7 +429,7 @@ describe("UsersManager", function () {
                 $('#user-text-filter').val('10_login8').change();
             });
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_add_user_by_login');
         });
 
@@ -442,7 +442,7 @@ describe("UsersManager", function () {
                 $('#user-text-filter').val('sldkjfsdlkfjsdkl').change();
             });
 
-            pageWrap = await page.$('.admin#content');
+            pageWrap = await page.$('.usersManager');
             expect(await pageWrap.screenshot()).to.matchImage('admin_add_user_not_exists');
         });
     });
